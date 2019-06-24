@@ -1,3 +1,3 @@
 
-var telegram = require('./bot');
-require('./web')(telegram); 
+var telegram = require('./bot_ex');
+require('./wh')(telegram); 
