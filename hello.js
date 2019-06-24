@@ -6,7 +6,7 @@ exports.parse = (callback) => {
   JSDOM.fromURL(url).then(dom => {
     let html = dom.window.document.documentElement.innerHTML;
 
-    parseData(html);
+    let res = parseData(html);
     callback(res);
   });
 };
