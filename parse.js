@@ -10,7 +10,7 @@ rp(url)
   .catch(function(err){
     //handle error
   });
-*/
+
 const curl = require("curl");
 const jsdom = require("jsdom");
 const url = "http://rozklad.kpi.ua/Schedules/ScheduleGroupSelection.aspx";
@@ -27,8 +27,6 @@ function parseData(html){
   const {JSDOM} = jsdom;
   const dom = new JSDOM(html);
   const $ = (require('jquery'))(dom.window);
-  var firstWeekStr = 'Перший тиждень:';
-
   $(function () {
     $('#ctl00_MainContent_ctl00_txtboxGroup').val("ІС-61");
     $('#ctl00_MainContent_ctl00_btnShowSchedule').click();
@@ -46,7 +44,7 @@ function parseData(html){
 //}
 var items = $('table')
 for (var i=0;i<items.length;i++){
-  console.log(items[i].find("tr:gt(j)"))//j 1,2,3,4,5
+  console.log(items[i].find("tr:gt(0)"))
 
 }  
-}
+}*/

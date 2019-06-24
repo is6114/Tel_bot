@@ -1,21 +1,18 @@
 
-const curl = require("curl");
 const jsdom = require("jsdom");
 const url = "http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=ca29408e-92e6-4394-ac55-56e1c45d5c8e";
+const {JSDOM} = jsdom;
+
 exports.parse = (callback) => {
-  curl.get(url, null, (err,resp,body)=>{
-      if(resp.statusCode == 200){
-         var res = parseData(body);
-         callback(res);
-      }
-      else{
-         //some error handling
-         console.log("error while fetching url");
-      }
-    });
+  JSDOM.fromURL(url).then(dom => {
+    let html = dom.window.document.documentElement.innerHTML;
+
+    parseData(html);
+    callback(res);
+  });
 };
+
 function parseData(html){
-  const {JSDOM} = jsdom;
   const dom = new JSDOM(html);
   const $ = (require('jquery'))(dom.window);
   var first = [];
