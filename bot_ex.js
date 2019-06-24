@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api')
 
-const parser = require('./hello');
+const hello = require('./hello');
 
 const token = process.env.TOKEN;
    
