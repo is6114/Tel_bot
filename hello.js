@@ -1,17 +1,4 @@
 
-/*
-const rp = require('request-promise');
-const url = 'https://kino-teatr.ua/kinoafisha-kiev.phtml?date=23.06.2019';
-
-rp(url)
-  .then(function(html){
-    //success!
-    console.log(html);
-  })
-  .catch(function(err){
-    //handle error
-  });
-*/
 const curl = require("curl");
 const jsdom = require("jsdom");
 const url = "http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=ca29408e-92e6-4394-ac55-56e1c45d5c8e";
