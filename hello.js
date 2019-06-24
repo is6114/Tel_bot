@@ -2,7 +2,6 @@
 const jsdom = require("jsdom");
 const url = "http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=ca29408e-92e6-4394-ac55-56e1c45d5c8e";
 const {JSDOM} = jsdom;
-
 exports.parse = (callback) => {
   JSDOM.fromURL(url).then(dom => {
     let html = dom.window.document.documentElement.innerHTML;
@@ -11,6 +10,9 @@ exports.parse = (callback) => {
     callback(res);
   });
 };
+firstWeekStr = '\n І Тиждень\n';
+
+secondWeekStr = '\n ІІ Тиждень\n';
 
 function parseData(html){
   const dom = new JSDOM(html);
