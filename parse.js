@@ -27,6 +27,8 @@ function parseData(html){
   const {JSDOM} = jsdom;
   const dom = new JSDOM(html);
   const $ = (require('jquery'))(dom.window);
+  var firstWeekStr = 'Перший тиждень:';
+
   $(function () {
     $('#ctl00_MainContent_ctl00_txtboxGroup').val("ІС-61");
     $('#ctl00_MainContent_ctl00_btnShowSchedule').click();
