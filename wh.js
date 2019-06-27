@@ -1,25 +1,34 @@
-var express = require('express');
+const http = require('http')
 var packageInfo = require('./package.json');
 var bodyParser = require('body-parser');
-
-var app = express();
-app.use(bodyParser.json());
-
-app.get('/', function (req, res) {
-  res.json({ version: packageInfo.version });
+const server = http.createServer(function(request, response) {
+  if (request.method == 'POST') {
+    if(request.url != '\/'+ process.env.TOKEN)
+    {
+      return;
+    }
+    var data = '';
+    request.on('data', function( chunk ) {
+      data += chunk;
+    });
+    request.on('end', function() {
+      request.rawBody = data;
+      console.log('on end: ', data )
+      if (data && data.indexOf('{') > -1 ) {
+        request.body = JSON.parse(data);
+      }
+      telegram.processUpdate(request.body);
+      response.writeHead(200, {'Content-Type': 'text/html'});
+      response.end();
+    });
+  }
 });
 
-var server = app.listen(process.env.PORT, function () { 
-  var host = server.address().address;
-  var port = server.address().port;
+console.log('finishing creating server');
+module.exports = function (bot) {
+  var ip = '::';
+  var port = process.env.PORT;
 
-  console.log('Web server started at http://%s:%s', host, port);
-});
-
-module.exports = function (telegram) {
-  app.post('/' + telegram.token, function (req, res) {
-    console.log(req.body);
-    telegram.processUpdate(req.body);
-    res.sendStatus(200);
-  });
-};
+  server.listen(port, ip);
+  console.log(`Web server started at http://${ip}:${port}`);
+}; 
