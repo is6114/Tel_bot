@@ -18,7 +18,7 @@ var server = app.listen(process.env.PORT, function () {
 
 module.exports = function (telegram) {
   app.post('/' + telegram.token, function (req, res) {
-    console.log(body)
+    console.log(req.body);
     telegram.processUpdate(req.body);
     res.sendStatus(200);
   });
