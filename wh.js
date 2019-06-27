@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
   res.json({ version: packageInfo.version });
 });
 
-var server = app.listen(process.env.PORT, function () {
+var server = app.listen(process.env.PORT, function () { 
   var host = server.address().address;
   var port = server.address().port;
 
@@ -18,6 +18,7 @@ var server = app.listen(process.env.PORT, function () {
 
 module.exports = function (telegram) {
   app.post('/' + telegram.token, function (req, res) {
+    console.log(body)
     telegram.processUpdate(req.body);
     res.sendStatus(200);
   });
